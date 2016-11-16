@@ -1,0 +1,88 @@
+代码规范
+1、变量命名
+	类变量
+	public int thisIsAVariant;
+	protected int _thisIsAVariant;
+	private int _thisIsAVariant;
+	private static int ThisIsAVariant;
+	private readonly int THIS_IS_A_VARIANT = 2333;
+	private const int THIS_IS_A_VARIANT = 2333;
+	
+	private delegate void ThisIsADelegate(string something);
+	private Action<string> ThisIsAnAction;
+	
+	局部变量
+	int thisIsAVariant;
+	
+2、属性
+	public int ThisIsAProperty
+	{
+		get
+		{
+			...
+		}
+		set
+		{
+			...
+		}
+	}
+	
+3、方法
+	public void ThisIsAFunction()
+	{
+	
+	}
+
+4、注意事项
+	1、不要有Magic Number
+	2、大括号必须另起一行
+	3、属性中不要有额外的逻辑，不允许有其他不相关的内容。例如：
+		这个是可以的
+		public int Age
+		{
+			get
+			{
+				return age;
+			}
+			set
+			{
+				if(value < 0 || value > 150)
+					age = 0;
+				else
+					age = value;
+			}
+		}
+		这个是不可以的
+		public int Age
+		{
+			get
+			{
+				return age;
+			}
+			set
+			{
+				if(value < 0 || value > 150)
+					age = 0;
+				else
+					age = value;
+				WriteToMySQL();		//这句与这里的逻辑没有任何关系，所以不要在这里写。如果有这种需要，整理出来一个方法，命名为SetAgeAndWriteToMySQL(int age){}
+			}
+		}
+	4、排版强制使用Tab。VS里有设置
+
+	5、换行，操作符之前换
+		例如：
+		if(condition1 
+			&& condition2 
+			|| condition3)
+
+		
+		int num = number1 
+				+ number2
+				- number3;
+
+		如果一行不是很长或者逻辑不是很复杂的话，尽量不要换行
+		
+参考
+https://msdn.microsoft.com/zh-cn/library/w2a9a9s3.aspx
+https://msdn.microsoft.com/zh-cn/library/ff926074
